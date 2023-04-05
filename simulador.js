@@ -34,8 +34,60 @@ let messageContinue = "Perfecto ya sabes como jugar, continuemos :D!";
 alert(messageContinue);
 
 
+// objetos
+
+const preguntas = [
+    {
+        id:1,
+        quest: {
+            question:"¿ Que es más profundo, el mar o el cielo ?",
+            positive:"1) el cielo",
+            negative:"2) el mar",
+            valor: 100,
+        }
+    },
+    {
+        id:2,
+        quest: {
+            question:"¿ Que duele perder más, la dignidad o el orgullo ?",
+            positive:"1) la dignidad",
+            negative:"2) el orgullo",
+        },
+        valor: 1000
+    },
+    {
+        id:3, 
+        quest: {
+            question:"¿ Que prefieres más, viajar o tiempo ?",
+            positive:"1) tiempo",
+            negative:"2) viajar",
+        },
+        valor: 1000000
+    },
+    {
+        id:4,
+        quest: {
+            question:"¿ elige un superpoder, volar o invisible ?",
+            positive:"1) volar",
+            negative:"2) invisible",
+        },
+        valor: 10000
+    }
+]
+console.log(preguntas.length)
+
+const filtrarPreguntas = preguntas.filter((number) =>number.id);
+console.table(filtrarPreguntas);
+
+for(const pregunta of preguntas){
+    prompt(pregunta.quest.question)
+}
+alert(pregunta)
+
+
 let messageBeta = "ACTUALMENTE EN DESARROLLO <3, GRACIAS POR PROBAR";
 alert(messageBeta);
+
 
 //funcion 
 
