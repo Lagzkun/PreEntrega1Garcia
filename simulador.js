@@ -3,7 +3,7 @@ let bienvenida = document.getElementById('bienvenida');
 bienvenida.innerHTML='<h1>¡Juega y Descubre que tanto Sabes!</h1>'
 
 let intro = document.getElementById('intro');
-intro.innerHTML='<p>Seleccion la respuesta que creas correcta y espera 3 segundos para la siguiente pregunta.</p>'
+intro.innerHTML='<p>Selecciona la respuesta que creas correcta y espera 3 segundos para la siguiente pregunta.</p>'
 
 const mostrar = document.getElementById('show')
 const ocultar = document.getElementById('hide');
