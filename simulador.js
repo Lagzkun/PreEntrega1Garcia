@@ -1,149 +1,181 @@
 //Introducción al Juego
-let introduction = document.getElementById('intro');
+let bienvenida = document.getElementById('bienvenida');
+bienvenida.innerHTML='<h1>¡Juega y Descubre que tanto Sabes!</h1>'
 
-introduction.innerHTML='<h1>Hola Bienvenido a Destino Incognito</h1>'
-// let welcome = "Hola Bienvenido a Destino Incognito";
-// alert(welcome);
-// console.log("Mensaje de Bienvenida: " +welcome);
+let intro = document.getElementById('intro');
+intro.innerHTML='<p>Seleccion la respuesta que creas correcta y espera 3 segundos para la siguiente pregunta.</p>'
 
-// let info = "Destino Incognito es un juego sencillo, vas a decidir si tu destino es... Positivo O Negativo eligiendo la opción que creas correcta";
-// alert(info);
-// console.log("Las Instrucciones del juego son: " +info);
+const mostrar = document.getElementById('show')
+const ocultar = document.getElementById('hide');
 
-
-// let namePlayer = prompt('Primero Ingresa tu Nombre :)');
-// alert('Preparate ' +namePlayer + " , Vamos a comenzar!");
-// console.log("El nombre de usuario es: " +namePlayer);
-
-//Preguntas 
-// let warning = "¡respuesta incorrecta, elige la opcion disponible!"
-// let example = "Comencemos con una pregunta de ejemplo:";
-// alert(example);
-
-// let ready = prompt('¿ Deseas hacer el tutorial ? s-si / n-no');
-// while(ready == "s") {
-// let test = prompt('¿ Es color azul el cielo ? Responde escribiendo el numero: \n 1)-si \n 2)-no')
-//     if ( test == "1"){
-//         alert("respuesta correcta! :)");
-//     }else if (test == "2"){
-//         alert("respuesta incorrecta! :(");
-//     }else{
-//         alert(warning);
-//     }
-//     ready = alert('Tutorial Completado :D')
-// };
-
-// let messageContinue = "Perfecto ya sabes como jugar, continuemos :D!";
-// alert(messageContinue);
-
-const preguntas = [
-    {
-        id:1,
-        quest1: {
-            question:"¿ Que es más profundo, el mar o el cielo ?",
-            positive:"1) el cielo",
-            negative:"2) el mar",
-            valor: 100,
-        }
-    },
-    {
-        id:2,
-        quest2: {
-            question:"¿ Que duele perder más, la dignidad o el orgullo ?",
-            positive:"1) la dignidad",
-            negative:"2) el orgullo",
-        },
-        valor: 1000
-    },
-    {
-        id:3, 
-        quest3: {
-            question:"¿ Que prefieres más, viajar o tiempo ?",
-            positive:"1) tiempo",
-            negative:"2) viajar",
-        },
-        valor: 1000000
-    },
-    {
-        id:4,
-        quest: {
-            question:"¿ elige un superpoder, volar o invisible ?",
-            positive:"1) volar",
-            negative:"2) invisible",
-        },
-        valor: 10000
+hide.style.display = "none";
+mostrar.addEventListener('click', () => {
+    if (hide.style.display === 'none') {
+      hide.style.display = '';
+    }else {
+      hide.style.display = 'none';
     }
-]
-
-let miBoton = document.getElementById('boton1')
-let miCard = document.getElementById('card')
-miBoton.addEventListener('click',agregarCard)
-
-function agregarCard() {
-    miCard.innerHTML= `
-    <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Start
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-      ${preguntas[0].quest1.question}
-        <ul>
-            <li>${preguntas[0].quest1.positive}</li>
-            <li>${preguntas[0].quest1.negative}</li>
-        </ul>
-        <input type="text" placeholder="Escribe aquí">
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-    `
-}
-
-let miBoton2 = document.getElementById('boton2')
-
-miBoton2.addEventListener('click', function() {
-    alert('En desarrollo');
   });
 
-let miBoton3 = document.getElementById('boton3')
+const reset = document.getElementById('reset');
 
-miBoton3.addEventListener('click', function() {
-    alert('En desarrollo');
+reset.addEventListener('click', function() {
+  window.location.reload();
 });
-console.log(preguntas.length)
 
-const filtrarPreguntas = preguntas.filter((number) =>number.id);
-console.table(filtrarPreguntas);
+let preguntas_aleatorias = true;
+let mostrar_pantalla_juego_terminado = true;
+let reiniciar_puntos_al_reiniciar_el_juego = true;
 
-for(const pregunta of preguntas){
-    prompt(pregunta.quest.question)
+window.onload = function () {
+  base_preguntas = readText("objects.json");
+  interprete_bp = JSON.parse(base_preguntas);
+  escogerPreguntasAleatoria();
+};
+
+let pregunta;
+let posibles_respuestas;
+
+btn_correspondiente = [
+  select_id("btn1"),
+  select_id("btn2"),
+  select_id("btn3"),
+  select_id("btn4")
+];
+
+let preguntas = [];
+let preguntas_hechas = 0;
+let preguntas_correctas = 0;
+
+function escogerPreguntasAleatoria() {
+  let n;
+  if (preguntas_aleatorias) {
+    n = Math.floor(Math.random() * interprete_bp.length);
+  } else {
+    n = 0;
+  }
+  while (preguntas.includes(n)) {
+    n++;
+    if (n >= interprete_bp.length) {
+      n = 0;
+    }
+    if (preguntas.length == interprete_bp.length) {
+      if (juego_terminado) {
+        swal.fire({
+          title: "juego finalizado",
+          text: "puntuación: " + preguntas_correctas + "/" + (preguntas_hechas - 1),
+          icon: "success"
+        })
+      }
+      if (reiniciar_juego) {
+        preguntas_correctas = 0
+        preguntas_hechas = 0
+      }
+      preguntas = [];
+    }
+  }
+  preguntas.push(n);
+  preguntas_hechas++;
+
+  escogerPregunta(n);
 }
-alert(pregunta)
 
+function escogerPregunta(n) {
+  pregunta = interprete_bp[n];
+  select_id("categoria").innerHTML = pregunta.categoria;
+  select_id("pregunta").innerHTML = pregunta.pregunta;
+  select_id("numero").innerHTML = n;
+  let pc = preguntas_correctas;
+  if (preguntas_hechas > 1) {
+    select_id("puntaje").innerHTML = pc + "/" + (preguntas_hechas - 1);
+  } else {
+    select_id("puntaje").innerHTML = "";
+  }
 
-let messageBeta = "ACTUALMENTE EN DESARROLLO <3, GRACIAS POR PROBAR";
-alert(messageBeta);
+  style("imagen").objectFit = pregunta.objectFit;
+  desordenarRespuesta(pregunta);
+  if (pregunta.imagen) {
+    select_id("imagen").setAttribute("src", pregunta.imagen); 
+      style("imagen").height = "200px";
+      style("imagen").width = "100px";
+    } else {
+      style("imagen").height = "0px"
+      style("imagen").width = "0";
+      setTimeout(() => {
+        select_id("imagen").setAttribute("src", "");
+      }, 500);
+    }
+  }
 
-
-//funcion 
-
-function thanks(){
-    let messageThanks = "Gracias por jugar "
-    alert(messageThanks + namePlayer);
+function desordenarRespuesta(pregunta) {
+  posibles_respuestas = [
+    pregunta.respuesta,
+    pregunta.incorrecta1,
+    pregunta.incorrecta2,
+    pregunta.incorrecta3,
+  ];
+  posibles_respuestas.sort(() => Math.random() - 0.5);
+  select_id("btn1").innerHTML = posibles_respuestas[0];
+  select_id("btn2").innerHTML = posibles_respuestas[1];
+  select_id("btn3").innerHTML = posibles_respuestas[2];
+  select_id("btn4").innerHTML = posibles_respuestas[3];
 }
+
+let suspender_botones = false;
+
+function oprimir_btn(i) {
+  if (suspender_botones) {
+    return;
+  }
+  suspender_botones = true;
+  if (posibles_respuestas[i] == pregunta.respuesta) {
+    preguntas_correctas++;
+    btn_correspondiente[i].style.background = "lightgreen";
+  } else {
+    btn_correspondiente[i].style.background = "pink";
+  }
+  for (let j = 0; j < 4; j++) {
+    if (posibles_respuestas[j] == pregunta.respuesta) {
+      btn_correspondiente[j].style.background = "lightgreen";
+      break;
+    }
+  }
+  setTimeout(() => {
+    reiniciar();
+    suspender_botones = false;
+  }, 3000);
+}
+
+function reiniciar() {
+  for (const btn of btn_correspondiente) {
+    btn.style.background = "white";
+  }
+  escogerPreguntasAleatoria();
+}
+
+function select_id(id) {
+  return document.getElementById(id);
+}
+
+function style(id) {
+  return select_id(id).style;
+}
+
+function readText(ruta_local) {
+  var texto = null;
+  var xmlhttp = new XMLHttpRequest ();
+  xmlhttp.open("GET", ruta_local, false);
+  xmlhttp.send();
+  if (xmlhttp.status == 200) {
+    texto = xmlhttp.responseText;
+  }
+  return texto;
+}
+
+// function thanks(){
+//     let messageThanks = "Gracias por jugar "
+//     alert(messageThanks + namePlayer);
+// }
 
 // ejecutar la funcion
-thanks();
+// thanks();

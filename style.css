@@ -1,49 +1,111 @@
+* {
+    transition: 0.3s;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    background-color: #222;
+    font-family: 'Poppins', sans-serif;
     margin: 0;
+    padding: 0;
+    text-align: center;
+    font-size: 120%;
+    background-image: linear-gradient(135deg, #00B7D4, #505488, #2F3F80,
+                                    #161569, #5A4894, #A950A1, #FF7CAE);
+    background-size: 500%;
+    animation: fanimado 10s infinite;
 }
 header {
     background-color: #333;
     padding: 20px;
-    text-align: center;
 }
 .header-title {
     color: #4CAF50;
 }
 .container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #FFF;
-    box-shadow: 0 0 10px #999;
+    width: 98vw;
+    height: 100vh;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
-.section-main {
-    text-align: center;
+.encabezado {
+    position: relative;
+    background: #FFF;
+    min-width: 300px;
+    width: 70%;
+    max-width: 600px;
+    padding: 10px;
 }
-.button {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #4CAF50;
+.bienvenida {
+    font-size: 175%;
+}
+.texto-intro {
+    font-size: 150%;
+    font-weight: regular;
+    color: yellow;
+}
+.caja {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.categoria {
+    opacity: 0.3;
+    text-align: left;
+}
+.pregunta {
+    padding: 10px;
+}
+.imagen {
+    object-fit: cover;
+    height: 0px;
+    width: 0px;
+}
+.btn {
+    background: #FFF;
+    width: 60%;
+    max-width: 550px;
+    padding: 10px;
+    margin: 5px;
+    cursor: pointer;
+}
+.btn:hover {
+    transform: scale(1.05);
+}
+.btn-primary {
+    background: #4CAF50;
+    font-size: 1.5rem;
+}
+.btn-secundary {
+    background: #ca7483;
+}
+.numero {
+    position: absolute;
+    opacity: 0.3;
+    top: 10px;
+    right: 10px;
+}
+.puntaje {
+    padding: 10px;
     color: #FFF;
-    text-align: center;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
 }
-.button:hover {
-    background-color: #3e8e41;
-}
-.card-custom {
-    margin-top: 20px;
-}
+
 footer {
     background-color: #333;
     padding: 20px;
     text-align: center;
 }
-@media screen and (max-width: 600px) {
-    .container {
-        padding: 10px;
+
+@keyframes fanimado {
+    0%{
+        background-position: 0% 50%;
+    }
+    50%{
+        background-position: 100% 50%;
+    }
+    100%{
+        background-position: 0% 50%;
     }
 }

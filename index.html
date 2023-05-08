@@ -5,27 +5,62 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <title>JavaScript</title>
+    <link rel="stylesheet" href="clima.css">
+    <title>Simulador de Preguntas</title>
 </head>
 <body>
-    <header>
-        <h1 class="header-title">Juega y Descubre</h1>
-    </header>
         <div class="container">
-            <div class="section-main">
-                <div id="intro"></div>
-                <p>Destino Incognito es un juego sencillo, vas a decidir si tu destino es... Positivo O Negativo eligiendo la opción que creas correcta</p>
-                <a href="#" class="button" id="boton1">Pregunta 1</a>
-                <a href="#" class="button" id="boton2">Pregunta 2</a>
-                <a href="#" class="button" id="boton3">Pregunta 3</a>
-                <div class="card-custom" id="card"></div>
+            
+            <div class="section-main"></div>
+            <div class="bienvenida" id="bienvenida"></div>
+            <div class="texto-intro" id="intro"></div>
+            <button id="show" type="button" class="btn btn-primary">
+                    !Vamos a Comenzar!
+            </button>
+            <div id="hide" class="caja">
+                <button class="btn btn-secundary" id="reset">Reiniciar</button>
+                <div class="puntaje" id="puntaje"></div>
+                <div class="encabezado">
+                    <div class="categoria" id="categoria"></div>
+                    <div class="numero" id="numero"></div>
+                    <div class="pregunta" id="pregunta"></div>
+                    <img src="#" class="imagen" id="imagen" alt="imagen">
+                </div>
+                <div class="btn" id="btn1" onclick="oprimir_btn(0)"></div>
+                <div class="btn" id="btn2" onclick="oprimir_btn(1)"></div>
+                <div class="btn" id="btn3" onclick="oprimir_btn(2)"></div>
+                <div class="btn" id="btn4" onclick="oprimir_btn(3)"></div>
             </div>
         </div>
-    <footer>
-        &copy; 2023 Mi página web
-    </footer>
+        <div class="weather-content">
+            <section class="weather-box">
+                <h1>Buscador del clima</h1>
+                <div class="result">
+                    <p>Agrege cuidad y pais</p>
+                </div>
+                <form action="" method="POST" class="get-weather">
+                    <input type="text" name="city" id="city" placeholder="Escribe la ciudad...">
+                    <select name="" id="country">
+                        <option disabled selected value="">Selecciona un Pais</option>
+                        <option value="AR">Argentina</option>
+                        <option value="CO">Colombia</option>
+                        <option value="CR">Costa Rica</option>
+                        <option value="ES">España</option>
+                        <option value="US">Estados Unidos</option>
+                        <option value="MX">México</option>
+                        <option value="PE">Perú</option>
+                    </select>
+                    <input type="submit" name="" id="" value="Obtener Clima">
+                </form>
+            </section>
+        </div>
+        
+    <!-- sweetalert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- JavaScript -->
     <script src="simulador.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <!--Api Clima-->
+    <script src="clima.js"></script>
+
 </body>
 </html>
