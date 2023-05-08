@@ -109,3 +109,9 @@ footer {
         background-position: 0% 50%;
     }
 }
+
+@media (max-width: 625px){
+    .container {
+      height: 150vh;
+    }
+}
